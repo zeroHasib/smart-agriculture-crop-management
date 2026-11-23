@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Agriculture | Reports & Analytics</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="farmer-dashboard">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-logo">SA</div>
+                <div>
+                    <h2>Smart Agriculture</h2>
+                    <small>Farmer Portal</small>
+                </div>
+            </div>
+
+            <div class="sidebar-label">MAIN MENU</div>
+
+            <nav class="sidebar-nav">
+
+                <a href="dashboard.html" class="nav-link">
+                    <span>Dashboard</span>
+                    <small>ড্যাশবোর্ড</small>
+                </a>
+
+                <a href="fields.html" class="nav-link">
+                    <span>My Land</span>
+                    <small>জমি ও খামার</small>
+                </a>
+
+                <a href="crops.html" class="nav-link">
+                    <span>Crop Management</span>
+                    <small>ফসল ব্যবস্থাপনা</small>
+                </a>
+
+                <a href="activities.html" class="nav-link">
+                    <span>Farm Activities</span>
+                    <small>কৃষিকাজের তথ্য</small>
+                </a>
+
+                <a href="expenses.html" class="nav-link">
+                    <span>Expenses</span>
+                    <small>কৃষি খরচ</small>
+                </a>
+
+                <a href="reports.html" class="nav-link active">
+                    <span>Reports</span>
+                    <small>আয় ও লাভ-ক্ষতি</small>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+                <p>Smart Agriculture System</p>
+                <small>Manage your farm easily.</small>
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+
+                <div>
+                    <p class="breadcrumb">Home / Reports</p>
+                    <h2>Reports & Analytics</h2>
+                </div>
+
+                <button id="logoutBtn" class="logout-btn">
+                    Logout
+                </button>
+
+            </header>
+
+
+            <!-- WELCOME BANNER -->
+            <section class="welcome-banner">
+
+                <div>
+                    <p class="welcome-label">FARM ANALYTICS</p>
+
+                    <h1>Reports & Analytics</h1>
+
+                    <p>
+                        আপনার কৃষি খরচ, ফসল এবং খামারের
+                        আর্থিক কার্যক্রম বিশ্লেষণ করুন।
+                    </p>
+                </div>
+
+                <div class="welcome-decoration">
+                    FARM REPORTS
+                </div>
+
+            </section>
+
+
+            <!-- REPORT FILTER -->
+            <section class="report-filter-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>রিপোর্ট ফিল্টার</h3>
+                        <p>Filter reports by date range</p>
+                    </div>
+                </div>
+
+                <div class="report-filter-card">
+
+                    <div class="report-filter-group">
+                        <label for="reportStartDate">Start Date</label>
+                        <input
+                            type="date"
+                            id="reportStartDate"
+                        >
+                    </div>
+
+                    <div class="report-filter-group">
+                        <label for="reportEndDate">End Date</label>
+                        <input
+                            type="date"
+                            id="reportEndDate"
+                        >
+                    </div>
+
+                    <div class="report-filter-actions">
+
+                        <button
+                            type="button"
+                            id="applyReportFilter"
+                            class="primary-btn"
+                            
+                        >
+                            Apply Filter
+                        </button>
+
+                        <button
+                            type="button"
+                            id="resetReportFilter"
+                            class="secondary-btn"
+                            disabled
+                        >
+                            Reset
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <p id="reportFilterMessage"></p>
+
+            </section>
+
+
+            <!-- SUMMARY STATISTICS -->
+            <section class="report-statistics-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>খরচের সারসংক্ষেপ</h3>
+                        <p>Expense Summary</p>
+                    </div>
+                </div>
+
+                <div class="statistics-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-icon">৳</div>
+
+                        <div>
+                            <p>Total Expenses</p>
+                            <h2 id="reportTotalExpenses">৳0.00</h2>
+                            <small>মোট কৃষি খরচ</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+
+                        <div>
+                            <p>Expense Records</p>
+                            <h2 id="reportExpenseCount">0</h2>
+                            <small>মোট খরচের রেকর্ড</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">🌾</div>
+
+                        <div>
+                            <p>Active Crops</p>
+                            <h2 id="reportCropCount">0</h2>
+                            <small>চলমান ফসল</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">🏡</div>
+
+                        <div>
+                            <p>Total Farms</p>
+                            <h2 id="reportFarmCount">0</h2>
+                            <small>মোট খামার</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CATEGORY WISE REPORT -->
+            <section class="report-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>Category-wise Expense</h3>
+                        <p>খরচের ধরন অনুযায়ী বিশ্লেষণ</p>
+                    </div>
+                </div>
+
+                <div class="report-card">
+
+                    <div class="report-card-header">
+                        <h3>Expense by Category</h3>
+                        <span>৳ BDT</span>
+                    </div>
+
+                    <div
+                        id="categoryExpenseChart"
+                        class="report-chart-placeholder"
+                    >
+                        <p>Category-wise chart will appear here.</p>
+                    </div>
+
+                    <div
+                        id="categoryExpenseTable"
+                        class="report-table-container"
+                    >
+                        <p class="report-empty-message">
+                            No category report available yet.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- MONTHLY EXPENSE REPORT -->
+            <section class="report-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>Monthly Expense Report</h3>
+                        <p>মাস অনুযায়ী কৃষি খরচ</p>
+                    </div>
+                </div>
+
+                <div class="report-card">
+
+                    <div class="report-card-header">
+                        <h3>Monthly Expenses</h3>
+                        <span>৳ BDT</span>
+                    </div>
+
+                    <div
+                        id="monthlyExpenseChart"
+                        class="report-chart-placeholder"
+                    >
+                        <p>Monthly expense chart will appear here.</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CROP WISE REPORT -->
+            <section class="report-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>Crop-wise Expense</h3>
+                        <p>ফসল অনুযায়ী খরচের হিসাব</p>
+                    </div>
+                </div>
+
+                <div class="report-card">
+
+                    <div class="report-card-header">
+                        <h3>Expenses by Crop</h3>
+                        <span>৳ BDT</span>
+                    </div>
+
+                    <div
+                        id="cropExpenseReport"
+                        class="report-table-container"
+                    >
+                        <p class="report-empty-message">
+                            No crop report available yet.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- FARM WISE REPORT -->
+            <section class="report-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>Farm-wise Expense</h3>
+                        <p>খামার অনুযায়ী খরচের হিসাব</p>
+                    </div>
+                </div>
+
+                <div class="report-card">
+
+                    <div class="report-card-header">
+                        <h3>Expenses by Farm</h3>
+                        <span>৳ BDT</span>
+                    </div>
+
+                    <div
+                        id="farmExpenseReport"
+                        class="report-table-container"
+                    >
+                        <p class="report-empty-message">
+                            No farm report available yet.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- REVENUE AND PROFIT -->
+            <section class="report-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>Income & Profit Analysis</h3>
+                        <p>আয় ও লাভ-ক্ষতির বিশ্লেষণ</p>
+                    </div>
+                </div>
+
+                <div class="report-card">
+
+                    <div class="report-empty-state">
+
+                        <div class="report-empty-icon">📈</div>
+
+                        <h3>Income Management Coming Next</h3>
+
+                        <p>
+                            Crop Sales এবং Revenue Management module
+                            তৈরি হওয়ার পর এখানে Income, Profit এবং
+                            Loss হিসাব দেখানো হবে।
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- EXPORT REPORT -->
+            <section class="report-export-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>Export Reports</h3>
+                        <p>রিপোর্ট ডাউনলোড করুন</p>
+                    </div>
+                </div>
+
+                <div class="report-export-card">
+
+                    <div>
+                        <h3>Download Your Farm Reports</h3>
+
+                        <p>
+                            আপনার কৃষি খরচের রিপোর্ট PDF অথবা
+                            CSV format-এ সংরক্ষণ করুন।
+                        </p>
+                    </div>
+
+                    <div class="report-export-actions">
+
+                        <button
+                            type="button"
+                            id="exportPDFBtn"
+                            disabled
+                        >
+                            Export PDF
+                        </button>
+
+                        <button
+                            type="button"
+                            id="exportCSVBtn"
+                            disabled
+                        >
+                            Export CSV
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+            <footer class="dashboard-footer">
+
+                Smart Agriculture & Crop Management System
+
+                <span>Helping Farmers Manage Better</span>
+
+            </footer>
+
+            <p id="reportMessage"></p>
+
+        </main>
+
+    </div>
+
+    <script src="/js/main.js"></script>
+
+</body>
+</html>

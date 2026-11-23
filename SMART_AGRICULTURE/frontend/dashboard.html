@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Agriculture | Farmer Dashboard</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="farmer-dashboard">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-logo">SA</div>
+                <div>
+                    <h2>Smart Agriculture</h2>
+                    <small>Farmer Portal</small>
+                </div>
+            </div>
+
+            <div class="sidebar-label">MAIN MENU</div>
+
+            <nav class="sidebar-nav">
+
+                <a href="dashboard.html" class="nav-link active">
+                    <span>Dashboard</span>
+                    <small>ড্যাশবোর্ড</small>
+                </a>
+
+                <a href="fields.html" class="nav-link">
+                    <span>My Land</span>
+                    <small>জমি ও খামার</small>
+                </a>
+
+                <a href="crops.html" class="nav-link">
+                    <span>Crop Management</span>
+                    <small>ফসল ব্যবস্থাপনা</small>
+                </a>
+
+                <a href="activities.html" class="nav-link">
+                    <span>Farm Activities</span>
+                    <small>কৃষিকাজের তথ্য</small>
+                </a>
+
+                <a href="expenses.html" class="nav-link">
+                    <span>Expenses</span>
+                    <small>কৃষি খরচ</small>
+                </a>
+
+                <a href="reports.html" class="nav-link">
+                    <span>Reports</span>
+                    <small>আয় ও লাভ-ক্ষতি</small>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+                <p>Smart Agriculture System</p>
+                <small>Manage your farm easily.</small>
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOP BAR -->
+            <header class="topbar">
+
+                <div>
+                    <p class="breadcrumb">Home / Dashboard</p>
+                    <h2>Farmer Dashboard</h2>
+                </div>
+
+                <button id="logoutBtn" class="logout-btn">
+                    Logout
+                </button>
+
+            </header>
+
+
+            <!-- WELCOME SECTION -->
+            <section class="welcome-banner">
+
+                <div>
+                    <p class="welcome-label">FARMER PORTAL</p>
+
+                    <h1 id="welcomeMessage">
+                        Welcome, Farmer!
+                    </h1>
+
+                    <p>
+                        আপনার কৃষি কার্যক্রম, জমি ও ফসলের তথ্য
+                        এক জায়গা থেকে পরিচালনা করুন।
+                    </p>
+                </div>
+
+                <div class="welcome-decoration">
+                    SMART FARMING
+                </div>
+
+            </section>
+
+
+            <!-- PROFILE INFORMATION -->
+            <section class="profile-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>আপনার অ্যাকাউন্ট</h3>
+                        <p>Farmer Account Information</p>
+                    </div>
+                </div>
+
+                <div class="profile-card">
+
+                    <div class="profile-avatar">F</div>
+
+                    <div class="profile-info">
+                        <h3>Registered Farmer</h3>
+
+                        <p>
+                            Farmer ID:
+                            <strong id="farmerId">Loading...</strong>
+                        </p>
+
+                        <p>
+                            Email:
+                            <strong id="farmerEmail">Loading...</strong>
+                        </p>
+                    </div>
+
+                    <div class="account-status">
+                        <span class="status-dot"></span>
+                        Active Session
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- LIVE FARM STATISTICS -->
+            <section class="statistics-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>আপনার খামারের সারসংক্ষেপ</h3>
+                        <p>Live Farm Statistics</p>
+                    </div>
+                </div>
+
+                <div class="statistics-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-icon">🌾</div>
+                        <div>
+                            <p>Total Farms</p>
+                            <h2 id="totalFarms">0</h2>
+                            <small>মোট খামার</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">🌱</div>
+                        <div>
+                            <p>Total Fields</p>
+                            <h2 id="totalFields">0</h2>
+                            <small>মোট জমি</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">🌿</div>
+                        <div>
+                            <p>Growing Crops</p>
+                            <h2 id="growingCrops">0</h2>
+                            <small>চলমান ফসলের ধরন</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">৳</div>
+                        <div>
+                            <p>Total Expenses</p>
+                            <h2 id="totalExpenses">৳0.00</h2>
+                            <small>মোট কৃষি খরচ</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <p id="statisticsMessage"></p>
+
+            </section>
+
+
+            <!-- MANAGEMENT SECTION -->
+            <section class="management-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h3>আপনার কৃষি কার্যক্রম</h3>
+                        <p>Choose what you want to manage</p>
+                    </div>
+                </div>
+
+                <div class="management-grid">
+
+                    <a href="fields.html" class="management-card">
+
+                        <div class="card-icon">01</div>
+
+                        <h3>জমি ও খামার</h3>
+
+                        <p>
+                            আপনার খামার এবং জমির পরিমাণ,
+                            নাম ও অন্যান্য তথ্য সংরক্ষণ করুন।
+                        </p>
+
+                        <span class="card-action">জমির তথ্য দেখুন →</span>
+
+                    </a>
+
+
+                    <a href="crops.html" class="management-card">
+
+                        <div class="card-icon">02</div>
+
+                        <h3>ফসল ব্যবস্থাপনা</h3>
+
+                        <p>
+                            ফসলের তালিকা এবং ফসল সম্পর্কিত
+                            প্রয়োজনীয় তথ্য দেখুন।
+                        </p>
+
+                        <span class="card-action">ফসল দেখুন →</span>
+
+                    </a>
+
+
+                    <a href="activities.html" class="management-card">
+
+                        <div class="card-icon">03</div>
+
+                        <h3>কৃষিকাজের তথ্য</h3>
+
+                        <p>
+                            সেচ, সার প্রয়োগ এবং অন্যান্য
+                            কৃষিকাজের তথ্য সংরক্ষণ করুন।
+                        </p>
+
+                        <span class="card-action">কাজের তথ্য দিন →</span>
+
+                    </a>
+
+
+                    <a href="expenses.html" class="management-card">
+
+                        <div class="card-icon">04</div>
+
+                        <h3>কৃষি খরচ</h3>
+
+                        <p>
+                            বীজ, সার, শ্রমিক এবং অন্যান্য
+                            কৃষি খরচের হিসাব রাখুন।
+                        </p>
+
+                        <span class="card-action">খরচের হিসাব →</span>
+
+                    </a>
+
+
+                    <a href="reports.html" class="management-card">
+
+                        <div class="card-icon">05</div>
+
+                        <h3>আয় ও লাভ-ক্ষতি</h3>
+
+                        <p>
+                            ফসল বিক্রির আয় এবং মোট খরচের
+                            হিসাব দেখুন।
+                        </p>
+
+                        <span class="card-action">রিপোর্ট দেখুন →</span>
+
+                    </a>
+
+
+                    <a href="activities.html" class="management-card">
+
+                        <div class="card-icon">06</div>
+
+                        <h3>ফসলের পরিচর্যা</h3>
+
+                        <p>
+                            ফসলের বিভিন্ন পরিচর্যা ও
+                            কৃষিকাজের রেকর্ড রাখুন।
+                        </p>
+
+                        <span class="card-action">পরিচর্যার তথ্য →</span>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+            <footer class="dashboard-footer">
+                Smart Agriculture & Crop Management System
+                <span>Helping Farmers Manage Better</span>
+            </footer>
+
+            <p id="dashboardMessage"></p>
+
+        </main>
+
+    </div>
+
+    <script src="/js/main.js"></script>
+
+</body>
+</html>

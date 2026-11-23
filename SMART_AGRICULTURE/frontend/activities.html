@@ -1,0 +1,581 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Activities | Smart Agriculture</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .activity-page {
+            width: 100%;
+        }
+
+        .activity-heading {
+            margin-bottom: 25px;
+        }
+
+        .activity-heading h1 {
+            font-size: 25px;
+            color: #203b2a;
+            margin-bottom: 8px;
+        }
+
+        .activity-heading p {
+            color: #829187;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .activity-summary {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .activity-summary-card {
+            background: #fff;
+            border: 1px solid #e8eee9;
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(27, 73, 45, 0.04);
+        }
+
+        .activity-summary-card p {
+            color: #829187;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .activity-summary-card h2 {
+            color: #1c5935;
+            font-size: 25px;
+        }
+
+        .activity-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.5fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        .activity-card {
+            background: #fff;
+            border: 1px solid #e6ece7;
+            border-radius: 13px;
+            padding: 24px;
+            box-shadow: 0 4px 16px rgba(27, 73, 45, 0.04);
+            min-width: 0;
+        }
+
+        .activity-card-header {
+            margin-bottom: 22px;
+        }
+
+        .activity-card-header h2 {
+            color: #214c34;
+            font-size: 18px;
+            margin-bottom: 7px;
+        }
+
+        .activity-card-header p {
+            color: #89958c;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .activity-form-group {
+            margin-bottom: 17px;
+        }
+
+        .activity-form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #344c3b;
+            margin-bottom: 8px;
+        }
+
+        .activity-form-group input,
+        .activity-form-group select,
+        .activity-form-group textarea {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #dce6de;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: Arial, sans-serif;
+            outline: none;
+            background: #fff;
+            color: #26352a;
+        }
+
+        .activity-form-group textarea {
+            min-height: 95px;
+            resize: vertical;
+        }
+
+        .activity-form-group input:focus,
+        .activity-form-group select:focus,
+        .activity-form-group textarea:focus {
+            border-color: #27843e;
+            box-shadow: 0 0 0 3px rgba(39, 132, 62, 0.08);
+        }
+
+        .activity-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .activity-btn {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .activity-btn-primary {
+            background: #27843e;
+            color: white;
+        }
+
+        .activity-btn-primary:hover {
+            background: #1d6830;
+        }
+
+        .activity-btn-secondary {
+            background: #edf2ee;
+            color: #425548;
+        }
+
+        .activity-btn-secondary:hover {
+            background: #dfe9e1;
+        }
+
+        .activity-message {
+            margin-top: 14px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .activity-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .activity-table {
+            width: 100%;
+            min-width: 650px;
+            border-collapse: collapse;
+        }
+
+        .activity-table th {
+            background: #f2f7f3;
+            color: #405a47;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: left;
+            padding: 14px 12px;
+            white-space: nowrap;
+        }
+
+        .activity-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #edf1ed;
+            font-size: 12px;
+            color: #526257;
+            vertical-align: middle;
+        }
+
+        .activity-table tbody tr:hover {
+            background: #f8fbf8;
+        }
+
+        .activity-table button {
+            border: none;
+            padding: 7px 10px;
+            margin: 2px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .activity-edit-btn {
+            background: #eaf2ff;
+            color: #2863a5;
+        }
+
+        .activity-delete-btn {
+            background: #fff0ee;
+            color: #c0392b;
+        }
+
+        .activity-edit-btn:hover {
+            background: #dceaff;
+        }
+
+        .activity-delete-btn:hover {
+            background: #ffe0dc;
+        }
+
+        @media (max-width: 1100px) {
+            .activity-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .activity-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .activity-card {
+                padding: 18px;
+            }
+
+            .activity-heading h1 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body class="farmer-dashboard">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-logo">SA</div>
+
+                <div>
+                    <h2>Smart Agriculture</h2>
+                    <small>Farmer Management</small>
+                </div>
+            </div>
+
+            <div class="sidebar-label">MAIN MENU</div>
+
+            <nav class="sidebar-nav">
+
+                <a href="/frontend/dashboard.html" class="nav-link">
+                    <span>Dashboard</span>
+                    <small>Overview and statistics</small>
+                </a>
+
+                <a href="/frontend/fields.html" class="nav-link">
+                    <span>Farm & Fields</span>
+                    <small>Manage your land</small>
+                </a>
+
+                <a href="/frontend/crops.html" class="nav-link">
+                    <span>Crop Management</span>
+                    <small>Manage crop information</small>
+                </a>
+
+                <a href="/frontend/planting.html" class="nav-link">
+                    <span>Planting Cycles</span>
+                    <small>Track crop planting</small>
+                </a>
+
+                <a href="/frontend/activities.html" class="nav-link active">
+                    <span>Farmer Activities</span>
+                    <small>Record farming work</small>
+                </a>
+
+                <a href="/frontend/expenses.html" class="nav-link">
+                    <span>Expenses</span>
+                    <small>Track farming costs</small>
+                </a>
+
+                <a href="/frontend/reports.html" class="nav-link">
+                    <span>Reports</span>
+                    <small>View farm reports</small>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+                <p>Smart Agriculture System</p>
+                <small>Manage your farm efficiently</small>
+            </div>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+
+                <div>
+                    <div class="breadcrumb">
+                        Dashboard / Farmer Activities
+                    </div>
+
+                    <h2>Farmer Activities</h2>
+                </div>
+
+                <div class="user-info">
+                    <span id="farmerEmail">Loading...</span>
+                    <button type="button" class="logout-btn" id="logoutBtn">
+                        Logout
+                    </button>
+                </div>
+
+            </header>
+
+            <section class="activity-page">
+
+                <!-- PAGE HEADING -->
+                <div class="activity-heading">
+                    <h1>Farming Activity Management</h1>
+
+                    <p>
+                        Record and monitor your daily farming activities,
+                        including irrigation, fertilizing, pesticide application
+                        and other field operations.
+                    </p>
+                </div>
+
+                <!-- SUMMARY CARDS -->
+                <div class="activity-summary">
+
+                    <div class="activity-summary-card">
+                        <p>Total Activities</p>
+                        <h2 id="totalActivities">0</h2>
+                    </div>
+
+                    <div class="activity-summary-card">
+                        <p>Total Activity Cost</p>
+                        <h2 id="totalActivityCost">৳0.00</h2>
+                    </div>
+
+                    <div class="activity-summary-card">
+                        <p>Activity Types</p>
+                        <h2 id="activityTypeCount">0</h2>
+                    </div>
+
+                </div>
+
+                <!-- FORM AND TABLE -->
+                <div class="activity-layout">
+
+                    <!-- ADD ACTIVITY FORM -->
+                    <div class="activity-card">
+
+                        <div class="activity-card-header">
+                            <h2 id="activityFormTitle">Add New Activity</h2>
+
+                            <p>
+                                Select your planting cycle and enter the
+                                farming activity details.
+                            </p>
+                        </div>
+
+                        <form id="activityForm">
+
+                            <input
+                                type="hidden"
+                                id="activityId"
+                            >
+
+                            <div class="activity-form-group">
+
+                                <label for="activityCycle">
+                                    Planting Cycle *
+                                </label>
+
+                                <select id="activityCycle" required>
+                                    <option value="">
+                                        Select planting cycle
+                                    </option>
+                                </select>
+
+                            </div>
+
+                            <div class="activity-form-group">
+
+                                <label for="activityType">
+                                    Activity Type *
+                                </label>
+
+                                <select id="activityType" required>
+
+                                    <option value="">
+                                        Select activity type
+                                    </option>
+
+                                    <option value="Irrigation">
+                                        Irrigation
+                                    </option>
+
+                                    <option value="Fertilizing">
+                                        Fertilizing
+                                    </option>
+
+                                    <option value="Pesticide">
+                                        Pesticide Application
+                                    </option>
+
+                                    <option value="Weeding">
+                                        Weeding
+                                    </option>
+
+                                    <option value="Land Preparation">
+                                        Land Preparation
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <div class="activity-form-group">
+
+                                <label for="activityDate">
+                                    Activity Date *
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="activityDate"
+                                    required
+                                >
+
+                            </div>
+
+                            <div class="activity-form-group">
+
+                                <label for="activityCost">
+                                    Activity Cost (৳)
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="activityCost"
+                                    min="0"
+                                    step="0.01"
+                                    value="0"
+                                    placeholder="Enter activity cost"
+                                >
+
+                            </div>
+
+                            <div class="activity-form-group">
+
+                                <label for="activityDescription">
+                                    Description
+                                </label>
+
+                                <textarea
+                                    id="activityDescription"
+                                    placeholder="Write activity details..."
+                                ></textarea>
+
+                            </div>
+
+                            <div class="activity-actions">
+
+                                <button
+                                    type="submit"
+                                    class="activity-btn activity-btn-primary"
+                                    id="saveActivityBtn"
+                                >
+                                    Save Activity
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="activity-btn activity-btn-secondary"
+                                    id="cancelActivityEditBtn"
+                                    style="display:none;"
+                                >
+                                    Cancel Edit
+                                </button>
+
+                            </div>
+
+                            <div
+                                id="activityMessage"
+                                class="activity-message"
+                                aria-live="polite"
+                            ></div>
+
+                        </form>
+
+                    </div>
+
+                    <!-- ACTIVITY TABLE -->
+                    <div class="activity-card">
+
+                        <div class="activity-card-header">
+                            <h2>Activity History</h2>
+
+                            <p>
+                                View, update and delete your recorded
+                                farming activities.
+                            </p>
+                        </div>
+
+                        <div
+                            id="activityListMessage"
+                            class="activity-message"
+                            aria-live="polite"
+                        >
+                            Loading activities...
+                        </div>
+
+                        <div class="activity-table-wrap">
+
+                            <table class="activity-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Activity</th>
+                                        <th>Crop</th>
+                                        <th>Field</th>
+                                        <th>Date</th>
+                                        <th>Cost</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="activityTableBody">
+
+                                    <tr>
+                                        <td colspan="6">
+                                            Loading activities...
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm & Field Management | Smart Agriculture</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .management-page {
+            padding: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            color: #174d35;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            color: #718078;
+        }
+
+        .management-section {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .section-heading h2 {
+            color: #174d35;
+            font-size: 20px;
+        }
+
+        .management-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #344b3e;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dce5df;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #268653;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .primary-btn {
+            background: #187747;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .primary-btn:hover {
+            background: #105d35;
+        }
+
+        .secondary-btn {
+            background: #edf5ef;
+            color: #187747;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .farm-list,
+        .field-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .farm-card,
+        .field-card {
+            border: 1px solid #e2ebe5;
+            border-radius: 12px;
+            padding: 18px;
+            background: #fbfdfb;
+        }
+
+        .farm-card h3,
+        .field-card h3 {
+            color: #174d35;
+            margin-bottom: 12px;
+        }
+
+        .farm-card p,
+        .field-card p {
+            color: #66766c;
+            margin: 7px 0;
+            font-size: 14px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            border: none;
+            padding: 8px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .edit-btn {
+            background: #e8f1ff;
+            color: #245b9b;
+        }
+
+        .delete-btn {
+            background: #fff0ee;
+            color: #c0392b;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .empty-message {
+            color: #87958b;
+            padding: 15px 0;
+            grid-column: 1 / -1;
+        }
+
+        @media(max-width: 700px) {
+            .management-page {
+                padding: 15px;
+            }
+
+            .management-form,
+            .farm-list,
+            .field-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="farmer-dashboard">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                <h2>🌱 Smart Agriculture</h2>
+                <p>Farmer Dashboard</p>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="/frontend/dashboard.html" class="nav-link">
+                    🏠 Dashboard
+                </a>
+
+                <a href="/frontend/fields.html" class="nav-link active">
+                    🌾 Farm & Fields
+                </a>
+
+                <a href="/frontend/crops.html" class="nav-link">
+                    🌱 Crop Management
+                </a>
+
+                <a href="/frontend/activities.html" class="nav-link">
+                    📋 Farming Activities
+                </a>
+
+                <a href="/frontend/expenses.html" class="nav-link">
+                    💰 Expenses
+                </a>
+
+                <a href="/frontend/reports.html" class="nav-link">
+                    📊 Reports
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+                <button id="logoutBtn" class="secondary-btn">
+                    Logout
+                </button>
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <h3>Farm & Field Management</h3>
+                <span id="farmerEmail">Farmer Account</span>
+            </header>
+
+
+            <div class="management-page">
+
+                <div class="page-heading">
+                    <h1>Farm & Field Management</h1>
+                    <p>Manage your farms, land areas and soil information.</p>
+                </div>
+
+
+                <!-- FARM FORM -->
+
+                <section class="management-section">
+
+                    <div class="section-heading">
+                        <h2>🏡 Add New Farm</h2>
+                    </div>
+
+                    <form id="farmForm" class="management-form">
+
+                        <div class="form-group">
+                            <label for="farmName">Farm Name</label>
+                            <input
+                                type="text"
+                                id="farmName"
+                                placeholder="Example: My Organic Farm"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="farmDistrict">District</label>
+                            <input
+                                type="text"
+                                id="farmDistrict"
+                                placeholder="Example: Cumilla"
+                                required
+                            >
+                        </div>
+
+                        <div class="full-width">
+                            <button type="submit" class="primary-btn">
+                                + Add Farm
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <div id="farmMessage" class="message"></div>
+
+                </section>
+
+
+                <!-- FARM LIST -->
+
+                <section class="management-section">
+
+                    <div class="section-heading">
+                        <h2>My Farms</h2>
+                        <button id="refreshFarms" class="secondary-btn">
+                            ↻ Refresh
+                        </button>
+                    </div>
+
+                    <div id="farmList" class="farm-list">
+                        <p class="empty-message">Loading farms...</p>
+                    </div>
+
+                </section>
+
+
+                <!-- FIELD FORM -->
+
+                <section class="management-section">
+
+                    <div class="section-heading">
+                        <h2>🌱 Add New Field</h2>
+                    </div>
+
+                    <form id="fieldForm" class="management-form">
+
+                        <div class="form-group full-width">
+                            <label for="fieldFarm">Select Farm</label>
+                            <select id="fieldFarm" required>
+                                <option value="">Select your farm</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fieldName">Field Name</label>
+                            <input
+                                type="text"
+                                id="fieldName"
+                                placeholder="Example: North Field"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fieldArea">Area (Acres)</label>
+                            <input
+                                type="number"
+                                id="fieldArea"
+                                min="0.01"
+                                step="0.01"
+                                placeholder="Example: 2.5"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="soilType">Soil Type</label>
+                            <select id="soilType" required>
+                                <option value="">Select soil type</option>
+                                <option value="Clay">Clay</option>
+                                <option value="Sandy">Sandy</option>
+                                <option value="Loamy">Loamy</option>
+                                <option value="Silty">Silty</option>
+                                <option value="Clay Loam">Clay Loam</option>
+                                <option value="Sandy Loam">Sandy Loam</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="soilPh">Soil pH</label>
+                            <input
+                                type="number"
+                                id="soilPh"
+                                min="0"
+                                max="14"
+                                step="0.1"
+                                placeholder="Example: 6.5"
+                                required
+                            >
+                        </div>
+
+                        <div class="full-width">
+                            <button type="submit" class="primary-btn">
+                                + Add Field
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <div id="fieldMessage" class="message"></div>
+
+                </section>
+
+
+                <!-- FIELD LIST -->
+
+                <section class="management-section">
+
+                    <div class="section-heading">
+                        <h2>My Fields</h2>
+                        <button id="refreshFields" class="secondary-btn">
+                            ↻ Refresh
+                        </button>
+                    </div>
+
+                    <div id="fieldList" class="field-list">
+                        <p class="empty-message">Loading fields...</p>
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

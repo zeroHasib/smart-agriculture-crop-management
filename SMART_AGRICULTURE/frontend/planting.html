@@ -1,0 +1,378 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planting Cycle | Smart Agriculture</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .page-content {
+            padding: 25px;
+        }
+
+        .page-heading {
+            margin-bottom: 22px;
+        }
+
+        .page-heading h1 {
+            color: #183b2b;
+            margin-bottom: 7px;
+        }
+
+        .page-heading p {
+            color: #718078;
+        }
+
+        .planting-form-card,
+        .cycle-list-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+
+        .planting-form-card h2,
+        .cycle-list-card h2 {
+            color: #234b36;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #34483b;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px;
+            border: 1px solid #dce5de;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #27834d;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .primary-btn,
+        .secondary-btn,
+        .edit-btn,
+        .delete-btn {
+            border: none;
+            padding: 11px 17px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .primary-btn {
+            background: #247a45;
+            color: white;
+        }
+
+        .secondary-btn {
+            background: #e9efeb;
+            color: #34483b;
+        }
+
+        .edit-btn {
+            background: #e5f1e8;
+            color: #247a45;
+            margin-right: 5px;
+        }
+
+        .delete-btn {
+            background: #fdeaea;
+            color: #bd3434;
+        }
+
+        .cycle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .cycle-card {
+            border: 1px solid #e3ebe5;
+            border-radius: 12px;
+            padding: 19px;
+            background: #fff;
+        }
+
+        .cycle-card h3 {
+            color: #214c32;
+            margin-bottom: 12px;
+        }
+
+        .cycle-card p {
+            color: #65756a;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .cycle-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #e5f4e9;
+            color: #247a45;
+            font-size: 12px;
+            font-weight: 700;
+            margin: 8px 0 14px;
+        }
+
+        .cycle-actions {
+            margin-top: 12px;
+        }
+
+        .message {
+            margin-top: 14px;
+            font-size: 14px;
+        }
+
+        .empty-message {
+            color: #849087;
+            padding: 15px 0;
+        }
+
+        @media (max-width: 700px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-content {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body class="farmer-dashboard">
+
+<div class="dashboard-layout">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h2>🌱 Smart Agriculture</h2>
+            <p>Farmer Panel</p>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <a href="dashboard.html" class="nav-link">
+                🏠 Dashboard
+            </a>
+
+            <a href="fields.html" class="nav-link">
+                🌾 Farm & Fields
+            </a>
+
+            <a href="crops.html" class="nav-link">
+                🌱 Crop Management
+            </a>
+
+            <a href="planting.html" class="nav-link active">
+                📅 Planting Cycle
+            </a>
+
+            <a href="activities.html" class="nav-link">
+                🧑‍🌾 Farming Activities
+            </a>
+
+            <a href="expenses.html" class="nav-link">
+                💰 Expenses
+            </a>
+
+            <a href="reports.html" class="nav-link">
+                📊 Reports
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="secondary-btn">
+                Logout
+            </button>
+        </div>
+
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h3>Planting Cycle Management</h3>
+                <p>Manage your crop planting and harvest schedule</p>
+            </div>
+
+            <div id="farmerEmail"></div>
+        </header>
+
+        <section class="page-content">
+
+            <div class="page-heading">
+                <h1>Planting Cycle</h1>
+                <p>Track your crops from planting to harvest.</p>
+            </div>
+
+            <!-- ADD / EDIT FORM -->
+
+            <div class="planting-form-card">
+
+                <h2 id="plantingFormTitle">
+                    Add New Planting Cycle
+                </h2>
+
+                <form id="plantingForm">
+
+                    <input
+                        type="hidden"
+                        id="cycleId"
+                    >
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label for="cycleField">
+                                Select Field
+                            </label>
+
+                            <select id="cycleField" required>
+                                <option value="">Loading fields...</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cycleCrop">
+                                Select Crop
+                            </label>
+
+                            <select id="cycleCrop" required>
+                                <option value="">Loading crops...</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="plantingDate">
+                                Planting Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="plantingDate"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="harvestDate">
+                                Expected Harvest Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="harvestDate"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group" id="statusGroup" hidden>
+                            <label for="cycleStatus">
+                                Cycle Status
+                            </label>
+
+                            <select id="cycleStatus">
+                                <option value="Growing">Growing</option>
+                                <option value="Harvested">Harvested</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            class="primary-btn"
+                            id="saveCycleBtn"
+                        >
+                            Save Planting Cycle
+                        </button>
+
+                        <button
+                            type="button"
+                            class="secondary-btn"
+                            id="cancelEditBtn"
+                            hidden
+                        >
+                            Cancel Edit
+                        </button>
+
+                    </div>
+
+                    <p
+                        id="plantingMessage"
+                        class="message"
+                    ></p>
+
+                </form>
+
+            </div>
+
+            <!-- CYCLE LIST -->
+
+            <div class="cycle-list-card">
+
+                <h2>Your Planting Cycles</h2>
+
+                <p
+                    id="cycleListMessage"
+                    class="empty-message"
+                >
+                    Loading planting cycles...
+                </p>
+
+                <div
+                    id="plantingCycleList"
+                    class="cycle-grid"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="/js/main.js"></script>
+
+</body>
+</html>

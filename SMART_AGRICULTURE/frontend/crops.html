@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Management | Smart Agriculture</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .management-page {
+            padding: 25px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            color: #183b2b;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            color: #718078;
+        }
+
+        .management-section {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+
+        .management-section h2 {
+            color: #214c36;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .management-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #405348;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid #dce5df;
+            border-radius: 8px;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .form-group textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .primary-btn {
+            background: #21834b;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .primary-btn:hover {
+            background: #176638;
+        }
+
+        .crop-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .crop-card {
+            border: 1px solid #e1eae4;
+            border-radius: 12px;
+            padding: 20px;
+            background: #fbfdfb;
+        }
+
+        .crop-card h3 {
+            color: #214c36;
+            margin-bottom: 10px;
+        }
+
+        .crop-card p {
+            color: #65756b;
+            margin: 7px 0;
+            font-size: 14px;
+        }
+
+        .crop-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .page-message {
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        @media(max-width: 650px) {
+            .management-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+            .management-page {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body class="farmer-dashboard">
+
+<div class="dashboard-layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <h2>🌱 Smart Agriculture</h2>
+            <p>Farmer Dashboard</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/frontend/dashboard.html" class="nav-link">🏠 Dashboard</a>
+            <a href="/frontend/fields.html" class="nav-link">🌾 Farm & Fields</a>
+            <a href="/frontend/crops.html" class="nav-link active">🌱 Crop Management</a>
+            <a href="/frontend/activities.html" class="nav-link">📋 Activities</a>
+            <a href="/frontend/expenses.html" class="nav-link">💰 Expenses</a>
+            <a href="/frontend/reports.html" class="nav-link">📊 Reports</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <button id="logoutBtn" class="nav-link">🚪 Logout</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h3>Crop Management</h3>
+                <p>Manage your available crops</p>
+            </div>
+            <div id="farmerEmail">Farmer</div>
+        </header>
+
+        <div class="management-page">
+
+            <div class="page-heading">
+                <h1>🌱 Crop Management</h1>
+                <p>Add and manage crop information for your agriculture system.</p>
+            </div>
+
+            <section class="management-section">
+                <h2>➕ Add New Crop</h2>
+
+                <form id="cropForm" class="management-form">
+
+                    <div class="form-group">
+                        <label for="cropName">Crop Name</label>
+                        <input
+                            type="text"
+                            id="cropName"
+                            placeholder="Example: Rice"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cropCategory">Crop Category</label>
+                        <select id="cropCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Cereal">Cereal</option>
+                            <option value="Vegetable">Vegetable</option>
+                            <option value="Oilseed">Oilseed</option>
+                            <option value="Pulse">Pulse</option>
+                            <option value="Fruit">Fruit</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cropDuration">Growing Duration (Days)</label>
+                        <input
+                            type="number"
+                            id="cropDuration"
+                            min="1"
+                            placeholder="Example: 90"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="cropDescription">Crop Description</label>
+                        <textarea
+                            id="cropDescription"
+                            placeholder="Write a short description about this crop..."
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <button type="submit" class="primary-btn">
+                            Add Crop
+                        </button>
+                        <p id="cropMessage" class="page-message"></p>
+                    </div>
+
+                </form>
+            </section>
+
+            <section class="management-section">
+                <h2>🌾 Available Crops</h2>
+
+                <div id="cropList" class="crop-list">
+                    <p>Loading crops...</p>
+                </div>
+
+                <p id="cropListMessage" class="page-message"></p>
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

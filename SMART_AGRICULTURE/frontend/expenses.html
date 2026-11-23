@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Expenses Management | Smart Agriculture</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body class="farmer-dashboard expense-page">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+
+                <div class="brand-logo">SA</div>
+
+                <div>
+                    <h2>Smart Agriculture</h2>
+                    <small>Farmer Management</small>
+                </div>
+
+            </div>
+
+            <div class="sidebar-label">MAIN MENU</div>
+
+            <nav class="sidebar-nav">
+
+                <a href="/frontend/dashboard.html" class="nav-link">
+                    <span>Dashboard</span>
+                    <small>Overview and statistics</small>
+                </a>
+
+                <a href="/frontend/fields.html" class="nav-link">
+                    <span>Farm & Fields</span>
+                    <small>Manage your land</small>
+                </a>
+
+                <a href="/frontend/crops.html" class="nav-link">
+                    <span>Crop Management</span>
+                    <small>Manage crop information</small>
+                </a>
+
+                <a href="/frontend/planting.html" class="nav-link">
+                    <span>Planting Cycles</span>
+                    <small>Track crop planting</small>
+                </a>
+
+                <a href="/frontend/activities.html" class="nav-link">
+                    <span>Farmer Activities</span>
+                    <small>Record farming work</small>
+                </a>
+
+                <a href="/frontend/expenses.html" class="nav-link active">
+                    <span>Expenses</span>
+                    <small>Track farming costs</small>
+                </a>
+
+                <a href="/frontend/reports.html" class="nav-link">
+                    <span>Reports</span>
+                    <small>View farm reports</small>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <p>Smart Agriculture System</p>
+
+                <small>Manage your farm efficiently</small>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="expense-main">
+
+            <!-- HEADER -->
+
+            <header class="expense-header">
+
+                <div>
+
+                    <p class="expense-breadcrumb">
+                        Dashboard / Financial Management
+                    </p>
+
+                    <h1>Expenses Management</h1>
+
+                    <p class="expense-subtitle">
+                        Track and manage your agricultural spending.
+                    </p>
+
+                </div>
+
+                <div class="expense-profile">
+
+                    <span class="expense-profile-icon">👨‍🌾</span>
+
+                    <div>
+                        <strong>Farmer Account</strong>
+                        <small id="farmerEmail">Loading...</small>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- WELCOME BANNER -->
+
+            <section class="expense-banner">
+
+                <div>
+
+                    <span class="expense-banner-label">
+                        FARM FINANCIAL OVERVIEW
+                    </span>
+
+                    <h2>Manage Your Farm Expenses</h2>
+
+                    <p>
+                        Keep track of seeds, fertilizers, labour,
+                        irrigation and other farming costs.
+                    </p>
+
+                </div>
+
+                <div class="expense-banner-icon">
+                    🌾
+                </div>
+
+            </section>
+
+
+            <!-- SUMMARY CARDS -->
+
+            <section class="expense-summary">
+
+                <article class="expense-summary-card">
+
+                    <div class="expense-summary-icon green-icon">
+                        ৳
+                    </div>
+
+                    <div>
+
+                        <p>Total Expenses</p>
+
+                        <h2 id="totalExpenseAmount">৳0.00</h2>
+
+                        <small>All recorded expenses</small>
+
+                    </div>
+
+                </article>
+
+
+                <article class="expense-summary-card">
+
+                    <div class="expense-summary-icon brown-icon">
+                        📋
+                    </div>
+
+                    <div>
+
+                        <p>Expense Records</p>
+
+                        <h2 id="expenseCount">0</h2>
+
+                        <small>Total transactions</small>
+
+                    </div>
+
+                </article>
+
+
+                <article class="expense-summary-card">
+
+                    <div class="expense-summary-icon cream-icon">
+                        📅
+                    </div>
+
+                    <div>
+
+                        <p>This Month</p>
+
+                        <h2 id="monthlyExpenseAmount">৳0.00</h2>
+
+                        <small>Current month's spending</small>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- ADD EXPENSE FORM -->
+
+            <section class="expense-panel" id="expenseFormSection">
+
+                <div class="expense-panel-heading">
+
+                    <div>
+
+                        <span class="expense-section-label">
+                            EXPENSE MANAGEMENT
+                        </span>
+
+                        <h2 id="expenseFormTitle">
+                            Add New Expense
+                        </h2>
+
+                        <p>
+                            Enter the cost details of your farming activities.
+                        </p>
+
+                    </div>
+
+                    <span class="expense-heading-icon">🧾</span>
+
+                </div>
+
+
+                <form id="expenseForm">
+
+                    <input
+                        type="hidden"
+                        id="expenseId"
+                    >
+
+                    <div class="expense-form-grid">
+
+                        <!-- PLANTING CYCLE -->
+
+                        <div class="expense-form-group">
+
+                            <label for="expenseCycle">
+                                Planting Cycle <span>*</span>
+                            </label>
+
+                            <select id="expenseCycle" required>
+
+                                <option value="">
+                                    Select planting cycle
+                                </option>
+
+                            </select>
+
+                            <small>
+                                Select the crop cycle related to this expense.
+                            </small>
+
+                        </div>
+
+
+                        <!-- EXPENSE CATEGORY -->
+
+                        <div class="expense-form-group">
+
+                            <label for="expenseType">
+                                Expense Category <span>*</span>
+                            </label>
+
+                            <select id="expenseType" required>
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option value="Seeds">🌱 Seeds</option>
+
+                                <option value="Fertilizer">🌿 Fertilizer</option>
+
+                                <option value="Irrigation">💧 Irrigation</option>
+
+                                <option value="Pesticide">🧪 Pesticide</option>
+
+                                <option value="Labor">👨‍🌾 Labor</option>
+
+                                <option value="Equipment">🚜 Equipment</option>
+
+                                <option value="Transportation">🚚 Transportation</option>
+
+                                <option value="Others">📦 Others</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- EXPENSE DATE -->
+
+                        <div class="expense-form-group">
+
+                            <label for="expenseDate">
+                                Expense Date <span>*</span>
+                            </label>
+
+                            <input
+                                type="date"
+                                id="expenseDate"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- AMOUNT -->
+
+                        <div class="expense-form-group">
+
+                            <label for="expenseAmount">
+                                Amount (BDT) <span>*</span>
+                            </label>
+
+                            <div class="expense-amount-input">
+
+                                <span>৳</span>
+
+                                <input
+                                    type="number"
+                                    id="expenseAmount"
+                                    min="0.01"
+                                    max="99999999.99"
+                                    step="0.01"
+                                    placeholder="Enter amount"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <div class="expense-form-group expense-full-width">
+
+                            <label for="expenseDescription">
+                                Description
+                            </label>
+
+                            <textarea
+                                id="expenseDescription"
+                                rows="3"
+                                placeholder="Write expense details (optional)..."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FORM MESSAGE -->
+
+                    <p
+                        id="expenseMessage"
+                        class="expense-message"
+                        aria-live="polite"
+                    ></p>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="expense-form-actions">
+
+                        <button
+                            type="submit"
+                            id="saveExpenseBtn"
+                            class="expense-save-btn"
+                        >
+                            + Save Expense
+                        </button>
+
+                        <button
+                            type="button"
+                            id="cancelExpenseEditBtn"
+                            class="expense-cancel-btn"
+                            hidden
+                        >
+                            Cancel Edit
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- EXPENSE HISTORY -->
+
+            <section class="expense-panel expense-history-panel">
+
+                <div class="expense-panel-heading">
+
+                    <div>
+
+                        <span class="expense-section-label">
+                            FARM FINANCIAL RECORDS
+                        </span>
+
+                        <h2>Expense History</h2>
+
+                        <p>
+                            Review and manage all your recorded expenses.
+                        </p>
+
+                    </div>
+
+                    <span class="expense-heading-icon">📊</span>
+
+                </div>
+
+
+                <!-- HISTORY TOOLBAR -->
+
+                <div class="expense-history-toolbar">
+
+                    <div>
+
+                        <strong>All Expenses</strong>
+
+                        <p>
+                            Your recorded agricultural spending
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="refreshExpenses"
+                        class="expense-refresh-btn"
+                    >
+                        ↻ Refresh
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="expenseListMessage"
+                    class="expense-list-message"
+                    aria-live="polite"
+                ></p>
+
+
+                <!-- EXPENSE TABLE -->
+
+                <div class="expense-table-wrapper">
+
+                    <table class="expense-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>Category</th>
+                                <th>Crop</th>
+                                <th>Farm / Field</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Actions</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="expenseTableBody">
+
+                            <tr>
+                                <td colspan="6" class="expense-empty">
+                                    Loading expenses...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <!-- FOOTER NOTE -->
+
+                <div class="expense-footer-note">
+
+                    <span>🌱</span>
+
+                    <p>
+                        Keep your expense records updated for accurate
+                        farm financial reports.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+
+            <footer class="expense-footer">
+
+                <p>
+                    © 2026 Smart Agriculture & Crop Management System
+                </p>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="/js/main.js"></script>
+
+</body>
+
+</html>
